@@ -124,7 +124,7 @@ def calibrate_mmcm_phase(roach, zdok_n, snap_names, bitwidth=8, man_trig=True, w
             falling = zero_glitches.index(False, n_zero)
             n_zero  = falling + 1
             min_len = falling - rising
-            if min_len > longest_min:
+            if longest_min==None or min_len > longest_min:
                 longest_min = min_len
                 optimal_ps = rising + int((falling-rising)/2)
         except ValueError:
