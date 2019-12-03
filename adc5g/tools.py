@@ -11,7 +11,7 @@ from .spi import (
 
 
 def pretty_glitch_profile(opt, glitches): 
-    hglitches = glitches[0:len(glitches)/2]
+    hglitches = glitches[0:len(glitches)//2]
     max_glitches = float(max(hglitches))
     gstr = "" # initialize our glitch string
     for p, g in enumerate(hglitches):
@@ -58,7 +58,7 @@ def get_test_vector(roach, snap_names, bitwidth=8, man_trig=True, wait_period=2)
     mode.
     """
     data_out = []
-    cores_per_snap = 4/len(snap_names)
+    cores_per_snap = 4//len(snap_names)
     for snap in snap_names:
         data = get_snapshot(roach, snap, bitwidth, man_trig=man_trig, wait_period=wait_period)
         data_bin = list(((p+128)>>1) ^ (p+128) for p in data)
@@ -149,5 +149,5 @@ def get_histogram(roach, zdok_n, core, fmt="hist_{zdok_n}_count_{core}", size=25
     then change the 'size' parameter.
     """
     counts = unpack('>{}Q'.format(size), roach.read(fmt.format(zdok_n=zdok_n, core=core), size*8))
-    return counts[size/2:] + counts[:size/2]
+    return counts[size//2:] + counts[:size//2]
 
